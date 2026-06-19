@@ -25,7 +25,14 @@ export function Login() {
 
       login(response.data.user, response.data.token);
     } catch (err: any) {
-      setError(err.response?.data?.error || 'Authentication failed. Please try again.');
+      const errorData = err.response?.data?.error || err.response?.data;
+      let errorMessage = 'Authentication failed. Please try again.';
+      if (typeof errorData === 'string') {
+        errorMessage = errorData;
+      } else if (errorData && typeof errorData.message === 'string') {
+        errorMessage = errorData.message;
+      }
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
