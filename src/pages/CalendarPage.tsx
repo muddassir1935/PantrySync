@@ -58,18 +58,20 @@ export function CalendarPage() {
   };
 
   return (
-    <div className="flex flex-col xl:flex-row gap-8">
-      <div className="flex-1 min-w-0">
-        <div className="mb-6">
-          <h1 className="text-3xl font-bold tracking-tight text-slate-900">Meal Calendar</h1>
-          <p className="text-slate-500 mt-2 text-lg">Plan your week and easily reschedule meals by dragging them.</p>
-        </div>
-        <DragDropContext onDragEnd={handleDragEnd}>
-          <MealCalendar calendar={calendar} onRemove={removeRecipeFromCalendar} />
-        </DragDropContext>
+    <div className="space-y-8">
+      {/* Page Header */}
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900">Meal Calendar</h1>
+        <p className="text-slate-500 mt-2 text-lg">Plan your week and easily reschedule meals by dragging them.</p>
       </div>
-      
-      <div className="w-full xl:w-96 flex-shrink-0">
+
+      {/* Calendar takes full width */}
+      <DragDropContext onDragEnd={handleDragEnd}>
+        <MealCalendar calendar={calendar} onRemove={removeRecipeFromCalendar} />
+      </DragDropContext>
+
+      {/* Grocery List below calendar */}
+      <div className="max-w-md">
         <GroceryList calendar={calendar} />
       </div>
     </div>
